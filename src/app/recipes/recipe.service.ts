@@ -9,6 +9,7 @@ export class RecipeService {
 
   recipes: Recipe[] = [
     new Recipe(
+      0,
       'Chicken Parmigiana',
       'Delicious fried chicken with tomato sauce and cheese',
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-202102-airfryerchickenparm-180-ls-1612561654.jpg?crop=1.00xw:1.00xh;0,0&resize=980:*',
@@ -18,6 +19,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      1,
       'Cacio ao Pepe',
       'Simple yet complex pasta',
       'https://img.itdg.com.br/tdg/images/blog/uploads/2018/09/espaguete-cacio-e-pepe.jpg?w=1200',
@@ -36,5 +38,9 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getRecipeById(id: number) {
+    return this.recipes.slice()[id];
   }
 }

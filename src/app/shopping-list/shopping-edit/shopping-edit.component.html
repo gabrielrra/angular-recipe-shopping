@@ -1,23 +1,49 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form (ngSubmit)="onAddIngredient(ingredientForm)" #ingredientForm="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" #nameInput>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            required
+            ngModel
+          />
         </div>
         <div class="col-sm-2 col-xs-6 form-group">
           <label for="amount">Amount</label>
-          <input min="0" type="number" id="amount" class="form-control" #amountInput>
+          <input
+            type="number"
+            id="amount"
+            class="form-control"
+            name="amount"
+            required
+            pattern="^[1-9]+[0-9]*$"
+            ngModel
+          />
         </div>
         <div class="col-sm-2 col-xs-6 form-group">
-          <label for="unit">Unit (kg, lb...)</label>
-          <input type="text" id="unit" class="form-control" #unitInput>
+          <label for="unit">Unit</label>
+          <select name="unit" id="unit" class="form-control" ngModel="g">
+            <option *ngFor="let unit of units" [value]="unit">
+              {{ unit }}
+            </option>
+          </select>
+          <!-- <input type="text" id="unit" name="unit" ngModel /> -->
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" (click)="onAddIngredient(nameInput, amountInput, unitInput)">Add</button>
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!ingredientForm.valid"
+          >
+            {{ editMode ? "Update" : "Add" }}
+          </button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-primary" type="button">Clear</button>
         </div>

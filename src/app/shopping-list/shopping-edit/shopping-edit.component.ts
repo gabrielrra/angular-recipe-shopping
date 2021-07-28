@@ -31,7 +31,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         this.ingForm.setValue({ name, amount, unit });
       });
   }
-  onAddIngredient(ingredientForm: NgForm) {
+  onSubmit(ingredientForm: NgForm) {
     let { name = '-', amount = 0, unit = '-' } = ingredientForm.value;
     const newIngredient = new Ingredient(name, Number(amount), unit);
     if (this.editMode) {
@@ -41,6 +41,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       this.shoppingListService.addIngredient(newIngredient);
     }
     ingredientForm.setValue({ name: '', amount: '', unit: 'g' });
+  }
+  onClear() {
+    this.ingForm.setValue({ name: '', amount: '', unit: 'g' });
   }
 
   ngOnDestroy() {

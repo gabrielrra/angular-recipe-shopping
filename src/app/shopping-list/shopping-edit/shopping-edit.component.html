@@ -25,7 +25,10 @@
             ngModel
             #amount="ngModel"
           />
-          <span *ngIf="!amount.valid && amount.touched" class="help-block">
+          <span
+            *ngIf="!amount.valid && amount.touched && amount.dirty"
+            class="help-block"
+          >
             Please enter a valid number
           </span>
         </div>
@@ -48,10 +51,15 @@
           >
             {{ editMode ? "Update" : "Add" }}
           </button>
-          <button class="btn btn-danger" type="button" [disabled]="!editMode">
+          <button
+            class="btn btn-danger"
+            type="button"
+            [disabled]="!editMode"
+            (click)="onDelete()"
+          >
             Delete
           </button>
-          <button class="btn btn-primary" type="button" (click)="onClear()">
+          <button class="btn btn-primary" type="button" (click)="clearForm()">
             Clear
           </button>
         </div>

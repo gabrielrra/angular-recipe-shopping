@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { RecipeService } from 'src/app/recipes/recipe.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 
@@ -10,7 +11,7 @@ import { ShoppingListService } from '../shopping-list.service';
   styleUrls: ['./shopping-edit.component.css'],
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
-  units = ['g', 'kg', 'ml', 'L', 'tbsp', 'cup(s)', 'lb', 'piece(s)', 'unit(s)'];
+  units = [];
 
   editIngredientSub: Subscription;
   editMode = false;
@@ -18,9 +19,13 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   @ViewChild('ingredientForm') ingForm: NgForm;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private recipeService: RecipeService
+  ) {}
 
   ngOnInit(): void {
+    this.units = this.recipeService.getUnits();
     this.editIngredientSub =
       this.shoppingListService.editingIngredient.subscribe((index) => {
         this.editMode = true;

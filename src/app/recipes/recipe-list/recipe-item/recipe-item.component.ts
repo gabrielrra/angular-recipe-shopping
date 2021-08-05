@@ -9,7 +9,7 @@ import { RecipeService } from '../../recipe.service';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipeItem;
-
+  @Input() id;
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {}
